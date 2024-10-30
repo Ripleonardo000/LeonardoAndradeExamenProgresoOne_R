@@ -1,7 +1,13 @@
+using LeonardoAndradeExamenProgresoOne_R.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ExamenAndraContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ExamenAndraContext")));
 
 var app = builder.Build();
 
@@ -25,3 +31,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
