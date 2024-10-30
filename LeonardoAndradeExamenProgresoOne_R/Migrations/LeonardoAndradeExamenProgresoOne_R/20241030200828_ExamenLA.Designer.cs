@@ -3,16 +3,19 @@ using LeonardoAndradeExamenProgresoOne_R.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LeonardoAndradeExamenProgresoOne_R.Migrations
+namespace LeonardoAndradeExamenProgresoOne_R.Migrations.LeonardoAndradeExamenProgresoOne_R
 {
-    [DbContext(typeof(ExamenAndraContext))]
-    partial class ExamenAndraContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(LeonardoAndradeExamenProgresoOne_RContext))]
+    [Migration("20241030200828_ExamenLA")]
+    partial class ExamenLA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +35,9 @@ namespace LeonardoAndradeExamenProgresoOne_R.Migrations
                     b.Property<int>("Cumple")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdCelular")
+                        .HasColumnType("int");
+
                     b.Property<bool>("empleo")
                         .HasColumnType("bit");
 
@@ -45,7 +51,9 @@ namespace LeonardoAndradeExamenProgresoOne_R.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Andrades");
+                    b.HasIndex("IdCelular");
+
+                    b.ToTable("Andrade");
                 });
 
             modelBuilder.Entity("LeonardoAndradeExamenProgresoOne_R.Models.Celular", b =>
@@ -69,7 +77,18 @@ namespace LeonardoAndradeExamenProgresoOne_R.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Celulars");
+                    b.ToTable("Celular");
+                });
+
+            modelBuilder.Entity("LeonardoAndradeExamenProgresoOne_R.Models.Andrade", b =>
+                {
+                    b.HasOne("LeonardoAndradeExamenProgresoOne_R.Models.Celular", "Celular")
+                        .WithMany()
+                        .HasForeignKey("IdCelular")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Celular");
                 });
 #pragma warning restore 612, 618
         }

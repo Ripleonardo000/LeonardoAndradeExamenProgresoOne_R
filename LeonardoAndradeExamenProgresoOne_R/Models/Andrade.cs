@@ -18,7 +18,10 @@ namespace LeonardoAndradeExamenProgresoOne_R.Models
         public Boolean empleo { get; set; }
 
 
-        public DataType Cumple { get; set; }
+
+           
+            public DateTime Cumple { get; set; }
+
 
         public Celular? Celular { get; set; }
 
