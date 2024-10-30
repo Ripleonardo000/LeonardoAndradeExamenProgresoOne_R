@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LeonardoAndradeExamenProgresoOne_R.Models
 {
@@ -16,7 +17,15 @@ namespace LeonardoAndradeExamenProgresoOne_R.Models
 
         public Boolean empleo { get; set; }
 
-       
-        public DataType Cumple {  get; set; }
+
+        public DataType Cumple { get; set; }
+
+        public Celular? Celular { get; set; }
+
+    [ForeignKey("Celular")]
+
+    public int IdCelular { get; set; }
+
+
     }
 }
